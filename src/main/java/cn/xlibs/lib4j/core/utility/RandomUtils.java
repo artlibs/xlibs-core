@@ -24,6 +24,11 @@ public final class RandomUtils {
         ALPHABET_SIZE = ALPHABET.length;
     }
 
+    /**
+     * random string combine with A-Z,a-z,0-9 in <code>length</code> size
+     * @param length random string size
+     * @return random string
+     */
     public static String randAZaz09String(int length) {
         StringBuilder sb = new StringBuilder(length);
         for (int i=0; i<length; i++) {

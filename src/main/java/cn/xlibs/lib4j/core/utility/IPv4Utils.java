@@ -15,23 +15,41 @@ import static cn.xlibs.lib4j.core.support.Constants.*;
  */
 public final class IPv4Utils {
     private IPv4Utils() {}
+    /** error message constants */
     public static final String INVALID_IP = "Invalid IPv4 Address";
+    /** ip range pattern*/
     private static final String IP_RANGE = "([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])";
+    /** C type ip address second part pattern */
     private static final String C_PRIVATE_IP_SECOND_RANGE = "(1[6-9]|2[0-9]|3[01])";
-    private static final String DOT = "\\.";
+    /** A type ip address pattern */
     private static final String A_PRIVATE_IP_REG = "^10" + DOT + IP_RANGE + DOT + IP_RANGE + DOT + IP_RANGE + "$";
+    /** B type ip address pattern */
     private static final String B_PRIVATE_IP_REG = "^172\\." + C_PRIVATE_IP_SECOND_RANGE + DOT + IP_RANGE + DOT + IP_RANGE + "$";
+    /** C type ip address pattern */
     private static final String C_PRIVATE_IP_REG = "^192\\.168\\." + IP_RANGE + DOT + IP_RANGE + "$";
+    /** private ip address pattern */
     private static final String[] PRIVATE_IP_REG = {
             A_PRIVATE_IP_REG, B_PRIVATE_IP_REG, C_PRIVATE_IP_REG
     };
+    /** loop ip address */
     public static final String LOOP_IP = "127.0.0.1";
+    /** localhost address */
     public static final String LOCALHOST = "localhost";
 
+    /**
+     * check if it is ipv4 address
+     * @param ip ip for test
+     * @return true if it is ipv4 address
+     */
     public static boolean isIPv4Address(String ip) {
         return Objects.nonNull(ip) && InetAddressUtils.isIPv4Address(ip);
     }
 
+    /**
+     * check if the ip is local ip
+     * @param ip input ip
+     * @return true if it is local ip
+     */
     public static boolean isLocalIp(String ip) {
         String[] localIps = {LOOP_IP, LOCALHOST};
         for (String localIp : localIps) {
@@ -42,6 +60,11 @@ public final class IPv4Utils {
         return false;
     }
 
+    /**
+     * check if the ip is private ip
+     * @param ip input ip
+     * @return true if it is private ip
+     */
     public static boolean isPrivateIp(String ip) {
         if (isLocalIp(ip)) {
             return true;
@@ -253,30 +276,51 @@ public final class IPv4Utils {
         }
     }
 
+    /** Inet Address Utils */
     private static class InetAddressUtils {
-        private static final String IPV4_BASIC_PATTERN_STRING = "(([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){1}(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])";
+        /** ipv4 pattern */
         private static final Pattern IPV4_PATTERN = Pattern.compile("^(([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){1}(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
+        /** ipv4 mapped ipv6 pattern */
         private static final Pattern IPV4_MAPPED_IPV6_PATTERN = Pattern.compile("^::[fF]{4}:(([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){1}(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){2}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
+        /** ipv46 standard pattern */
         private static final Pattern IPV6_STD_PATTERN = Pattern.compile("^[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){7}$");
+        /** ipv6 hex compressed pattern */
         private static final Pattern IPV6_HEX_COMPRESSED_PATTERN = Pattern.compile("^(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,5})?)::(([0-9A-Fa-f]{1,4}(:[0-9A-Fa-f]{1,4}){0,5})?)$");
-        private static final char COLON_CHAR = ':';
-        private static final int MAX_COLON_COUNT = 7;
 
-        private InetAddressUtils() {
-        }
+        private InetAddressUtils() {}
 
+        /**
+         * check if the input string is ipv4 address
+         * @param input input value
+         * @return true if the input string is ipv4 address
+         */
         public static boolean isIPv4Address(String input) {
             return IPV4_PATTERN.matcher(input).matches();
         }
 
+        /**
+         * check if the input string is ipv4 mapped ipv6 address
+         * @param input input value
+         * @return true if is ipv4 mapped ipv6 address
+         */
         public static boolean isIPv4MappedIPv64Address(String input) {
             return IPV4_MAPPED_IPV6_PATTERN.matcher(input).matches();
         }
 
+        /**
+         * check if the input string is ipv6 standard address
+         * @param input input value
+         * @return true if ipv6 address
+         */
         public static boolean isIPv6StdAddress(String input) {
             return IPV6_STD_PATTERN.matcher(input).matches();
         }
 
+        /**
+         * check if the input string is ipv6 hex compressed address
+         * @param input input value
+         * @return true if ipv6 address
+         */
         public static boolean isIPv6HexCompressedAddress(String input) {
             int colonCount = 0;
 
@@ -289,6 +333,11 @@ public final class IPv4Utils {
             return colonCount <= 7 && IPV6_HEX_COMPRESSED_PATTERN.matcher(input).matches();
         }
 
+        /**
+         * check if the input string is ipv6 address
+         * @param input input value
+         * @return true if ipv6 address
+         */
         public static boolean isIPv6Address(String input) {
             return isIPv6StdAddress(input) || isIPv6HexCompressedAddress(input);
         }

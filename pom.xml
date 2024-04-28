@@ -24,12 +24,13 @@
         <!-- apache commons end -->
         <junit-jupiter-engine.version>5.8.1</junit-jupiter-engine.version>
         <maven-jar-plugin.version>2.3.2</maven-jar-plugin.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.12.0</maven-compiler-plugin.version>
         <compiler-source.version>1.8</compiler-source.version>
         <compiler-release.version>8</compiler-release.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
+        <maven-surefire.version>3.2.5</maven-surefire.version>
         <maven-central-publish-plugin.version>0.4.0</maven-central-publish-plugin.version>
         <repository.url>git@github.com:artlibs/xlibs-core.git</repository.url>
     </properties>
@@ -195,17 +196,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <!-- https://stackoverflow.com/questions/51382356/maven-does-not-run-beforeeach-methods-while-running -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
-                <configuration>
-                    <argLine>
-                        -javaagent:${project.build.directory}${file.separator}${build.finalName}.jar=${test-case-package}
-                    </argLine>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.sonatype.central</groupId>

@@ -70,7 +70,6 @@ public class UnitTests {
         String desIv = "Xef2ydYU";
         String data = "data for testing";
 
-
         String fk = RandomUtils.randAZaz09String(6);
         String tmpDir = System.getProperty("java.io.tmpdir");
         File inputFile = Paths.get(tmpDir + "input_" + fk).toFile();

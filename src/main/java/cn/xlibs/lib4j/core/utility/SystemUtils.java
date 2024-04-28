@@ -16,49 +16,83 @@ import java.nio.charset.StandardCharsets;
  */
 public final class SystemUtils {
     private SystemUtils(){}
-
+    /** get current OS */
     private static final String OS = System.getProperty("os.name").toLowerCase();
-
+    /**
+     * check if current os is macOS
+     * @return true if macOS
+     */
     public static boolean isMacOS() {
         return OS.contains("mac os") && !OS.contains("x");
     }
-
+    /**
+     * check if current os is MacOSX
+     * @return true if MacOSX
+     */
     public static boolean isMacOSX() {
         return "mac os x".equals(OS);
     }
-
+    /**
+     * check if current os is Windows
+     * @return true if Windows
+     */
     public static boolean isWindows() {
         return OS.contains("windows");
     }
-
+    /**
+     * check if current os is WindowsXP
+     * @return true if WindowsXP
+     */
     public static boolean isWindowsXP() {
         return "windows xp".equals(OS);
     }
-
+    /**
+     * check if current os is Windows2003
+     * @return true if Windows2003
+     */
     public static boolean isWindows2003() {
         return "windows 2003".equals(OS);
     }
-
+    /**
+     * check if current os is Vista
+     * @return true if Vista
+     */
     public static boolean isWindowsVista() {
         return "windows vista".equals(OS);
     }
-
+    /**
+     * check if current os is Linux
+     * @return true if Linux
+     */
     public static boolean isLinux() {
         return OS.contains("linux");
     }
-
+    /**
+     * check if current os is windows7
+     * @return true if windows7
+     */
     public static boolean isWindows7() {
         return OS.contains("windows 7");
     }
-
+    /**
+     * check if current os is windows8
+     * @return true if windows8
+     */
     public static boolean isWindows8() {
         return OS.contains("windows 8");
     }
-
+    /**
+     * check if current os is windows10
+     * @return true if windows10
+     */
     public static boolean isWindows10() {
         return OS.contains("windows 10");
     }
 
+    /**
+     * check if current os is windows11
+     * @return true if windows11
+     */
     public static boolean isWindows11() {
         return OS.contains("windows 11");
     }
@@ -81,7 +115,6 @@ public final class SystemUtils {
 
     /**
      * get Machine Code
-     *
      * @return Machine Code
      */
     public static String getMachineCode() {
