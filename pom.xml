@@ -12,7 +12,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <lombok.version>1.18.26</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <fastjson.version>1.2.83</fastjson.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <guava.version>33.0.0-jre</guava.version>
